@@ -25,7 +25,8 @@ exports.groupMessages = async (req, res) => {
     try {
         const message = new Message({ senderId, content, groupId });
         await message.save();
-        // Broadcast message to the group
+
+       //broadcast msg
         io.to(groupId).emit('message', message);
         res.status(201).json(message);
     } catch (err) {

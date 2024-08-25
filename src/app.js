@@ -6,7 +6,7 @@
     const http = require('http');
     const app = express()
     const socketIo = require('socket.io');
-    const port = process.env.PORT
+    const port = process.env.PORT || 4000
     const Routes = require('./routes/router');
     const Message = require('./models/message');
 

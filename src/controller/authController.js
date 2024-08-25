@@ -1,12 +1,16 @@
+
+const express = require('express');
 const User = require("../models/user")
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const router = express.Router();
+
 
 exports.register = async (req, res) => {
-    console.log('Request====>', req.body); // Debugging line
+    console.log('Request====>', req.body);
 
     const { username, email, password } = req.body;
 
@@ -95,3 +99,5 @@ exports.login = async (req, res) => {
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
+
+module.exports = router;

@@ -1,15 +1,52 @@
-const express = require("express")
-const db = require('./db/conn');
-const app = express()
-const port = 3000 
+    const express = require("express")
+    const dotenv = require('dotenv');
+    dotenv.config();
+    const db = require('./db/conn');
+    const bodyParser = require('body-parser');
+    const http = require('http');
+    const app = express()
+    const socketIo = require('socket.io');
+    const port = process.env.PORT
+    const Routes = require('./routes/router');
+    const Message = require('./models/message');
+
+    const server = http.createServer(app);
+
+    const io = socketIo(server);
 
 
-app.get('/user', (req, res)=>{
-    res.send("")
-})
+    // app.use(bodyParser.json());
+    app.use(express.json());
 
-app.listen(()=>{
 
-    console.log(`server is running at ${port}`);
+    app.post('/test', (req, res) => {
+        console.log('Request body:==>', req.body);
+        res.send('Body received');
+    });
+
+    app.use('/api', Routes);
+
+    io.on('connection', (socket) => {
+        console.log('A user connected:', socket.id);
     
-})
+        socket.on('message', async (data) => {
+            console.log('Message received:', data);
+    
+       
+            const message = new Message(data);
+            await message.save();
+    
+           
+            io.emit('message', data);
+        });
+    
+        socket.on('disconnect', () => {
+            console.log('User disconnected:', socket.id);
+        });
+    });
+
+    app.listen(port, ()=>{
+
+        console.log(`server is running at ${port}`);
+        
+    })

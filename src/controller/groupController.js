@@ -6,7 +6,7 @@ const Message = require('../models/message');
 
 const router = express.Router();
 
-exports.group = async (req, res) => {
+const group = async (req, res) => {
     const { name, members } = req.body;
 
     try {
@@ -18,7 +18,7 @@ exports.group = async (req, res) => {
     }
 };
 
-exports.groupMessages = async (req, res) => {
+const groupMessages = async (req, res) => {
     const { groupId } = req.params;
     const { senderId, content } = req.body;
 
@@ -34,4 +34,4 @@ exports.groupMessages = async (req, res) => {
     }
 };
 
-module.exports = router;
+module.exports = { groupMessages , group };

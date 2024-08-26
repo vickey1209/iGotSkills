@@ -4,7 +4,7 @@ const Message = require('../models/message');
 const router = express.Router();
 
 
-exports.sendMessage = async (req, res) => {
+const sendMessage = async (req, res) => {
     try {
         const message = await messageService.sendMessage(req.body);
         res.status(201).json(message);
@@ -14,7 +14,7 @@ exports.sendMessage = async (req, res) => {
 };
 
 
-exports.messageHistory = async (req, res) => {
+const messageHistory = async (req, res) => {
     const { userId, withUserId, groupId, page = 1, pageSize = 10 } = req.query;
 
     try {
@@ -36,4 +36,4 @@ exports.messageHistory = async (req, res) => {
     }
 };
 
-module.exports = router;
+module.exports = { sendMessage , messageHistory }

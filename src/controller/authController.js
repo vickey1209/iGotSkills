@@ -9,7 +9,7 @@ dotenv.config();
 const router = express.Router();
 
 
-exports.register = async (req, res) => {
+const register = async (req, res) => {
     console.log('Request====>', req.body);
 
     const { username, email, password } = req.body;
@@ -54,7 +54,7 @@ exports.register = async (req, res) => {
 
 
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     console.log('Request body:', req.body); 
 
     const { email, password } = req.body;
@@ -100,4 +100,4 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-module.exports = router;
+module.exports = {register , login }

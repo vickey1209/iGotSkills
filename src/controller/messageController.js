@@ -3,6 +3,17 @@ const Message = require('../models/message');
 
 const router = express.Router();
 
+
+exports.sendMessage = async (req, res) => {
+    try {
+        const message = await messageService.sendMessage(req.body);
+        res.status(201).json(message);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
 exports.messageHistory = async (req, res) => {
     const { userId, withUserId, groupId, page = 1, pageSize = 10 } = req.query;
 

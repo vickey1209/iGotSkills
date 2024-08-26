@@ -16,7 +16,11 @@ const sendMessage = async (req, res) => {
 
 
 const messageHistory = async (req, res) => {
+   
+    
     const { userId, withUserId, groupId, page = 1, pageSize = 10 } = req.query;
+
+    console.log('parameters====>', req.query);
 
     try {
         let query = {};
@@ -26,15 +30,22 @@ const messageHistory = async (req, res) => {
             query = { groupId };
         }
 
+        console.log('query====>', query);
+
         const messages = await Message.find(query)
             .skip((page - 1) * pageSize)
             .limit(Number(pageSize))
             .sort({ timestamp: -1 });
 
+        console.log('Retrieved Messages:', messages);
+
         res.status(200).json(messages);
     } catch (err) {
-        res.status(500).json({ message: 'Server error' });
+        console.error('error in fetching message=====>', err);
+        res.status(500).json({ message: 'server error' });
     }
 };
+
+
 
 module.exports = { sendMessage , messageHistory }

@@ -32,11 +32,11 @@ const groupMessages = async (req, res) => {
         const message = new Message({ senderId, content, groupId });
         await message.save();
 
-        console.log("data got saved in dabtabase");
+        console.log("<==data got saved in database==>");
         
         const io = req.app.get('io');
        //broadcast msg
-        io.to(groupId).emit('message', message);
+        io.to(groupId).emit('message=>', message);
 
         console.log("Message broadcasted successfully");
         res.status(201).json(message);
@@ -44,7 +44,7 @@ const groupMessages = async (req, res) => {
 
     } catch (err) 
     {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'server error' });
     }
 };
 

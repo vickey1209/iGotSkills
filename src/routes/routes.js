@@ -4,16 +4,13 @@ const groupController = require('../controller/groupController');
 const messageController = require("../controller/messageController")
 
 
-
 const router = express.Router();
-
-
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.post('/messages', messageController.sendMessage);
 router.post('/creategroup',groupController.groupCreate);
 router.post('/:groupId/messages' ,groupController.groupMessages)
-router.get('/history' , messageController.messageHistory)
+router.get('/messagehistory',messageController.messageHistory)
 
 module.exports = router;

@@ -28,10 +28,10 @@
     app.use('/api', Routes);
 
     io.on('connection', (socket) => {
-        console.log('A user connected:', socket.id);
+        console.log('<====== user connected=====>', socket.id);
     
         socket.on('message', async (data) => {
-            console.log('Message received:', data);
+            console.log('message received====>', data);
     
        
             const message = new Message(data);
@@ -42,7 +42,7 @@
         });
     
         socket.on('disconnect', () => {
-            console.log('User disconnected:', socket.id);
+            console.log('user disconnected====>', socket.id);
         });
     });
 

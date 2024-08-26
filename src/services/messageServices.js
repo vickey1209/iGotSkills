@@ -5,7 +5,7 @@ const chatMessage = async (messageData) => {
 
   
     if (!content || !senderId || !receiverId) {
-        throw new Error('Content, sender, and receiver are required fields.');
+        throw new Error('<===== all details are required====>');
     }
 
     const message = new Message({

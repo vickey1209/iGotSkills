@@ -17,6 +17,7 @@
 
     // app.use(bodyParser.json());
     app.use(express.json());
+    app.set('io', io);
 
 
     app.post('/test', (req, res) => {

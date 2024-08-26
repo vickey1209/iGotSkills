@@ -1,12 +1,13 @@
 const express = require('express');
 const Message = require('../models/message');
+const messageService = require("../services/messageServices")
 
-const router = express.Router();
+
 
 
 const sendMessage = async (req, res) => {
     try {
-        const message = await messageService.sendMessage(req.body);
+        const message = await messageService.chatMessage(req.body);
         res.status(201).json(message);
     } catch (error) {
         res.status(400).json({ error: error.message });

@@ -12,7 +12,7 @@ const router = express.Router();
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.post('/messages', messageController.sendMessage);
-router.post('/group',groupController.group);
+router.post('/creategroup',groupController.groupCreate);
 router.post('/:groupId/messages' ,groupController.groupMessages)
 router.get('/history' , messageController.messageHistory)
 
